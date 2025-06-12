@@ -43,6 +43,17 @@
 </head>
 <body>
   <h1>ترا إلياس اخترق جوالك يا حبيبي 🥳</h1>
-  <button onclick="alert('كله مزح يا قلبي 😂😂')">وش السالفة؟</button>
+  <button onclick="scare()">وش السالفة؟</button>
+
+  <script>
+    function scare() {
+      alert('كله مزح يا قلبي 😂😂');
+
+      // يهز الجوال
+      if (navigator.vibrate) {
+        navigator.vibrate([200, 100, 200, 100, 300]);
+      }
+    }
+  </script>
 </body>
 </html>
