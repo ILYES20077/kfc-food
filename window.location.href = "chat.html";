@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>واتساب</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      background-color: #ece5dd;
+      font-family: sans-serif;
+    }
+
+    .header {
+      background-color: #075e54;
+      color: white;
+      padding: 15px;
+      font-size: 18px;
+    }
+
+    .chat {
+      padding: 20px;
+    }
+
+    .msg {
+      max-width: 80%;
+      padding: 10px 14px;
+      margin: 10px;
+      border-radius: 8px;
+      display: inline-block;
+      clear: both;
+      line-height: 1.4;
+    }
+
+    .from-them {
+      background: white;
+      float: left;
+    }
+
+    .from-me {
+      background: #dcf8c6;
+      float: right;
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: white;
+      padding: 15px;
+      text-align: center;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">واتساب - إلياس</div>
+
+<div class="chat">
+  <div class="msg from-them">تم اختراق جهازك بالكامل 🤖</div>
+  <div class="msg from-me">هاه؟! مين؟!</div>
+  <div class="msg from-them">إلياس يا حبيبي 😂</div>
+  <div class="msg from-me">طيب رجع ملفاتي 😭</div>
+  <div class="msg from-them">لازم تحول لي 999 ريال أول 😈</div>
+</div>
+
+<div class="footer">محادثة سرية - واتساب</div>
+
+</body>
+</html>
