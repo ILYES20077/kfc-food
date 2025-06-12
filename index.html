@@ -1,59 +1,136 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>إلياس اخترق جوالك!</title>
+  <meta charset="UTF-8">
+  <title>تم رصد نشاط مشبوه</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
-      background-color: #000;
-      color: #0f0;
+      background: black;
+      color: #00ff00;
       font-family: 'Courier New', monospace;
-      text-align: center;
-      padding-top: 15%;
-      animation: flash 1s infinite;
+      padding: 20px;
+      direction: rtl;
     }
 
-    h1 {
-      font-size: 30px;
+    .fake-header {
+      background: red;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    #terminal {
+      white-space: pre-wrap;
+      font-size: 14px;
+      line-height: 1.5;
+      background-color: #000;
+      padding: 10px;
+      border: 1px solid #0f0;
+      height: 300px;
+      overflow-y: auto;
+    }
+
+    #countdown {
+      font-size: 32px;
+      color: red;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    #final-message {
+      display: none;
+      text-align: center;
+      color: red;
+      font-size: 26px;
+      margin-top: 50px;
     }
 
     button {
-      margin-top: 40px;
-      padding: 15px 30px;
-      font-size: 18px;
+      margin-top: 20px;
+      display: none;
+      padding: 12px 24px;
       background-color: #0f0;
-      border: none;
       color: black;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
       cursor: pointer;
-      border-radius: 10px;
-      font-weight: bold;
-    }
-
-    button:hover {
-      background-color: #090;
-    }
-
-    @keyframes flash {
-      0% { background-color: black; color: #0f0; }
-      50% { background-color: #0f0; color: black; }
-      100% { background-color: black; color: #0f0; }
     }
   </style>
 </head>
 <body>
-  <h1>ترا إلياس اخترق جوالك يا حبيبي 🥳</h1>
-  <button onclick="scare()">وش السالفة؟</button>
 
-  <script>
-    function scare() {
-      alert('كله مزح يا قلبي 😂😂');
+<div class="fake-header">🚨 تنبيه من هيئة الأمن السيبراني</div>
 
-      // يهز الجوال
-      if (navigator.vibrate) {
-        navigator.vibrate([200, 100, 200, 100, 300]);
-      }
+<div id="terminal">جاري فحص النظام...</div>
+<div id="countdown"></div>
+<div id="final-message">
+  😱 تم اختراق جهازك بنجاح!<br><br>
+  😂 أمزح معك يا حبيبي... مع تحيات إلياس
+</div>
+<button onclick="location.reload()">رجّع كل شي</button>
+
+<audio id="alarm" src="https://www.soundjay.com/button/beep-07.mp3" preload="auto"></audio>
+<audio id="shock" src="https://www.soundjay.com/human/sounds/scream-01.mp3" preload="auto"></audio>
+
+<script>
+  const terminal = document.getElementById("terminal");
+  const countdownEl = document.getElementById("countdown");
+  const finalMsg = document.getElementById("final-message");
+  const btn = document.querySelector("button");
+  const alarm = document.getElementById("alarm");
+  const shock = document.getElementById("shock");
+
+  const commands = [
+    "اكتشاف نشاط مشبوه من عنوان IP: 192.168.1.101",
+    "تحميل وحدات الأمن السيبراني...",
+    "تحليل التطبيقات المثبتة...",
+    "تشغيل وحدة مكافحة التهديدات",
+    "تم الكشف عن فيروس محتمل",
+    "بدء الإغلاق القسري خلال 10 ثواني"
+  ];
+
+  let i = 0;
+
+  const loop = setInterval(() => {
+    terminal.innerText += commands[i] + '\n';
+    alarm.play();
+    if (navigator.vibrate) navigator.vibrate(100);
+    i++;
+    if (i === commands.length) {
+      clearInterval(loop);
+      startCountdown();
     }
-  </script>
+  }, 1000);
+
+  function startCountdown() {
+    let count = 10;
+    countdownEl.innerText = 🔒 سيتم قفل النظام خلال ${count} ثانية;
+    const interval = setInterval(() => {
+      count--;
+      countdownEl.innerText = 🔒 سيتم قفل النظام خلال ${count} ثانية;
+      if (navigator.vibrate) navigator.vibrate([200]);
+      alarm.play();
+      if (count === 0) {
+        clearInterval(interval);
+        scare();
+      }
+    }, 1000);
+  }
+
+  function scare() {
+    terminal.style.display = "none";
+    countdownEl.style.display = "none";
+    finalMsg.style.display = "block";
+    btn.style.display = "inline-block";
+    shock.play();
+    if (navigator.vibrate) navigator.vibrate([500, 300, 700]);
+  }
+</script>
+
 </body>
 </html>
