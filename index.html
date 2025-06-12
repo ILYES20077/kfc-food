@@ -81,9 +81,7 @@
   <div class="name">إلياس - متصل الآن</div>
 </div>
 
-<div class="chat" id="chat">
-  <!-- تظهر الرسائل تدريجياً بالصوت -->
-</div>
+<div class="chat" id="chat"></div>
 
 <div class="footer">واتساب المزيف - إلياس هكرك 😂</div>
 
@@ -102,6 +100,12 @@
   ];
 
   let index = 0;
+  let soundEnabled = false;
+
+  // تفعيل الصوت بعد أول ضغطة
+  document.body.addEventListener("click", () => {
+    soundEnabled = true;
+  }, { once: true });
 
   function showMessage() {
     if (index >= messages.length) return;
@@ -111,7 +115,11 @@
     msg.textContent = messages[index].text;
     chat.appendChild(msg);
 
-    keyboardSound.play();
+    if (soundEnabled) {
+      keyboardSound.currentTime = 0;
+      keyboardSound.play();
+    }
+
     chat.scrollTop = chat.scrollHeight;
 
     index++;
