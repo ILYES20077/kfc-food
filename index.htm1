@@ -10,12 +10,30 @@
       color: #0f0;
       font-family: 'Courier New', monospace;
       text-align: center;
-      padding-top: 20%;
+      padding-top: 15%;
       animation: flash 1s infinite;
     }
+
     h1 {
       font-size: 30px;
     }
+
+    button {
+      margin-top: 40px;
+      padding: 15px 30px;
+      font-size: 18px;
+      background-color: #0f0;
+      border: none;
+      color: black;
+      cursor: pointer;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #090;
+    }
+
     @keyframes flash {
       0% { background-color: black; color: #0f0; }
       50% { background-color: #0f0; color: black; }
@@ -25,5 +43,6 @@
 </head>
 <body>
   <h1>ترا إلياس اخترق جوالك يا حبيبي 🥳</h1>
+  <button onclick="alert('كله مزح يا قلبي 😂😂')">وش السالفة؟</button>
 </body>
 </html>
