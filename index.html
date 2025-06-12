@@ -14,8 +14,21 @@
     .header {
       background-color: #075e54;
       color: white;
-      padding: 15px;
-      font-size: 18px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+    }
+
+    .header img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-left: 10px;
+    }
+
+    .header .name {
+      font-weight: bold;
+      font-size: 16px;
     }
 
     .chat {
@@ -42,6 +55,13 @@
       float: right;
     }
 
+    .time {
+      font-size: 10px;
+      color: #555;
+      margin-top: 5px;
+      text-align: left;
+    }
+
     .footer {
       position: fixed;
       bottom: 0;
@@ -50,22 +70,56 @@
       padding: 15px;
       text-align: center;
       color: #aaa;
+      font-size: 12px;
     }
   </style>
 </head>
 <body>
 
-<div class="header">واتساب - إلياس</div>
-
-<div class="chat">
-  <div class="msg from-them">تم اختراق جهازك بالكامل 🤖</div>
-  <div class="msg from-me">هاه؟! مين؟!</div>
-  <div class="msg from-them">إلياس يا حبيبي 😂</div>
-  <div class="msg from-me">طيب رجع ملفاتي 😭</div>
-  <div class="msg from-them">لازم تحول لي 999 ريال أول 😈</div>
+<div class="header">
+  <img src="https://i.ibb.co/FXCBLyz/hacker-pfp.png" alt="elyes">
+  <div class="name">إلياس - متصل الآن</div>
 </div>
 
-<div class="footer">محادثة سرية - واتساب</div>
+<div class="chat" id="chat">
+  <!-- تظهر الرسائل تدريجياً بالصوت -->
+</div>
+
+<div class="footer">واتساب المزيف - إلياس هكرك 😂</div>
+
+<audio id="keyboard" src="https://www.soundjay.com/mechanical/sounds/keyboard-6.mp3" preload="auto"></audio>
+
+<script>
+  const chat = document.getElementById("chat");
+  const keyboardSound = document.getElementById("keyboard");
+
+  const messages = [
+    { text: "🔓 تم اختراق جهازك بالكامل!", type: "them" },
+    { text: "وشوو؟ 😳", type: "me" },
+    { text: "إلياس هكرك يا حبيبي 😂", type: "them" },
+    { text: "يا رجال رجّع ملفاتي بالله 😭", type: "me" },
+    { text: "حوّل 999 ريال أول 😈", type: "them" },
+  ];
+
+  let index = 0;
+
+  function showMessage() {
+    if (index >= messages.length) return;
+
+    const msg = document.createElement("div");
+    msg.className = "msg from-" + messages[index].type;
+    msg.textContent = messages[index].text;
+    chat.appendChild(msg);
+
+    keyboardSound.play();
+    chat.scrollTop = chat.scrollHeight;
+
+    index++;
+    setTimeout(showMessage, 1800);
+  }
+
+  setTimeout(showMessage, 1500);
+</script>
 
 </body>
 </html>
