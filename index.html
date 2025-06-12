@@ -2,13 +2,14 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>إلياس اخترقك 😈</title>
+  <title>📵 إلياس هكرك</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
       margin: 0;
       background-color: #ece5dd;
       font-family: sans-serif;
+      overflow: hidden;
     }
 
     .header {
@@ -33,6 +34,8 @@
 
     .chat {
       padding: 20px;
+      max-height: 80vh;
+      overflow-y: auto;
     }
 
     .msg {
@@ -62,6 +65,21 @@
       display: none;
     }
 
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: black;
+      color: lime;
+      font-family: monospace;
+      font-size: 16px;
+      padding: 30px;
+      box-sizing: border-box;
+      z-index: 9999;
+      overflow-y: auto;
+    }
+
     .footer {
       position: fixed;
       bottom: 0;
@@ -71,14 +89,6 @@
       text-align: center;
       color: #aaa;
       font-size: 12px;
-    }
-
-    .scary {
-      color: red;
-      font-size: 24px;
-      text-align: center;
-      margin-top: 50px;
-      display: none;
     }
   </style>
 </head>
@@ -96,30 +106,39 @@
 <div class="footer">واتساب المزيف - prank 🤫</div>
 
 <audio id="keyboard" src="https://www.soundjay.com/mechanical/sounds/keyboard-6.mp3" preload="auto"></audio>
-<audio id="alert" src="https://www.soundjay.com/button/beep-10.mp3" preload="auto"></audio>
+<audio id="alert" src="https://www.soundjay.com/button/beep-07.mp3" preload="auto" loop></audio>
 
-<div class="scary" id="scary">💀 تم تدمير جهازك بالكامل!</div>
+<div class="overlay" id="overlay"></div>
 
 <script>
   const chat = document.getElementById("chat");
   const typing = document.getElementById("typing");
   const keyboardSound = document.getElementById("keyboard");
   const alertSound = document.getElementById("alert");
-  const scary = document.getElementById("scary");
+  const overlay = document.getElementById("overlay");
 
   const messages = [
-    { text: "وينك؟", type: "them" },
-    { text: "هاه؟ مين؟", type: "me" },
-    { text: "تم اختراق جهازك الآن بالكامل...", type: "them" },
-    { text: "لا تمزح!!", type: "me" },
-    { text: "أنا إلياس.. وهكرتك 😉", type: "them" },
-    { text: "كيف سويت كذا؟", type: "me" },
-    { text: "وصلت لكل صورك، ملفاتك، وحتى الكاميرا 😈", type: "them" },
-    { text: "والحين؟", type: "me" },
-    { text: "قاعد أنزل بياناتك على سيرفر مخفي 🧠", type: "them" },
-    { text: "احذف كل شي تكفى", type: "me" },
-    { text: "أرسلت كل شي لأصدقائك 😂", type: "them" },
-    { text: "تم تنفيذ الأمر الأخير: التدمير النهائي", type: "them" }
+    { text: "تم الوصول إلى كاميرتك 📸", type: "them" },
+    { text: "وش السالفة؟!", type: "me" },
+    { text: "أنا إلياس... وهكرتك بالكامل 😈", type: "them" },
+    { text: "مستحيل!!", type: "me" },
+    { text: "قاعد أحمل صورك وموقعك الآن...", type: "them" },
+    { text: "حرام عليك تكفى 😭", type: "me" },
+    { text: "Too late... I'm in 🔐", type: "them" },
+    { text: "المرحلة الأخيرة تبدأ الآن", type: "them" }
+  ];
+
+  const hackingLines = [
+    "✔ Accessing front camera...",
+    "✔ Downloading all images...",
+    "✔ Tracking GPS location...",
+    "✔ Sending files to server...",
+    "✔ Deleting local storage...",
+    "✔ Hijacking microphone...",
+    "✔ Access granted to WhatsApp chats...",
+    "✔ Infiltrating system core...",
+    "⚠ System Breach: irreversible changes made.",
+    "💀 You have been hacked by Elyes"
   ];
 
   let index = 0;
@@ -130,14 +149,12 @@
   }, { once: true });
 
   function vibrate() {
-    if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+    if (navigator.vibrate) navigator.vibrate([300, 100, 300]);
   }
 
   function showMessage() {
     if (index >= messages.length) {
-      scary.style.display = "block";
-      alertSound.play();
-      vibrate();
+      startHackEffect();
       return;
     }
 
@@ -159,7 +176,23 @@
 
       index++;
       setTimeout(showMessage, 2000);
-    }, 1000 + Math.random() * 1000);
+    }, 1200 + Math.random() * 1000);
+  }
+
+  function startHackEffect() {
+    overlay.style.display = "block";
+    alertSound.play();
+    vibrate();
+    let i = 0;
+    const interval = setInterval(() => {
+      if (i >= hackingLines.length) {
+        clearInterval(interval);
+        return;
+      }
+      overlay.innerHTML += hackingLines[i] + "<br>";
+      vibrate();
+      i++;
+    }, 1000);
   }
 
   setTimeout(showMessage, 2000);
