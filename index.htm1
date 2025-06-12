@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إلياس اخترق جوالك!</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #0f0;
+      font-family: 'Courier New', monospace;
+      text-align: center;
+      padding-top: 20%;
+      animation: flash 1s infinite;
+    }
+    h1 {
+      font-size: 30px;
+    }
+    @keyframes flash {
+      0% { background-color: black; color: #0f0; }
+      50% { background-color: #0f0; color: black; }
+      100% { background-color: black; color: #0f0; }
+    }
+  </style>
+</head>
+<body>
+  <h1>ترا إلياس اخترق جوالك يا حبيبي 🥳</h1>
+</body>
+</html>
