@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>واتساب</title>
+  <title>إلياس اخترقك 😈</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
@@ -55,11 +55,11 @@
       float: right;
     }
 
-    .time {
-      font-size: 10px;
+    .typing {
+      font-style: italic;
       color: #555;
-      margin-top: 5px;
-      text-align: left;
+      margin: 10px;
+      display: none;
     }
 
     .footer {
@@ -72,6 +72,14 @@
       color: #aaa;
       font-size: 12px;
     }
+
+    .scary {
+      color: red;
+      font-size: 24px;
+      text-align: center;
+      margin-top: 50px;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -81,52 +89,80 @@
   <div class="name">إلياس - متصل الآن</div>
 </div>
 
-<div class="chat" id="chat"></div>
+<div class="chat" id="chat">
+  <div class="typing" id="typing">إلياس يكتب...</div>
+</div>
 
-<div class="footer">واتساب المزيف - إلياس هكرك 😂</div>
+<div class="footer">واتساب المزيف - prank 🤫</div>
 
 <audio id="keyboard" src="https://www.soundjay.com/mechanical/sounds/keyboard-6.mp3" preload="auto"></audio>
+<audio id="alert" src="https://www.soundjay.com/button/beep-10.mp3" preload="auto"></audio>
+
+<div class="scary" id="scary">💀 تم تدمير جهازك بالكامل!</div>
 
 <script>
   const chat = document.getElementById("chat");
+  const typing = document.getElementById("typing");
   const keyboardSound = document.getElementById("keyboard");
+  const alertSound = document.getElementById("alert");
+  const scary = document.getElementById("scary");
 
   const messages = [
-    { text: "🔓 تم اختراق جهازك بالكامل!", type: "them" },
-    { text: "وشوو؟ 😳", type: "me" },
-    { text: "إلياس هكرك يا حبيبي 😂", type: "them" },
-    { text: "يا رجال رجّع ملفاتي بالله 😭", type: "me" },
-    { text: "حوّل 999 ريال أول 😈", type: "them" },
+    { text: "وينك؟", type: "them" },
+    { text: "هاه؟ مين؟", type: "me" },
+    { text: "تم اختراق جهازك الآن بالكامل...", type: "them" },
+    { text: "لا تمزح!!", type: "me" },
+    { text: "أنا إلياس.. وهكرتك 😉", type: "them" },
+    { text: "كيف سويت كذا؟", type: "me" },
+    { text: "وصلت لكل صورك، ملفاتك، وحتى الكاميرا 😈", type: "them" },
+    { text: "والحين؟", type: "me" },
+    { text: "قاعد أنزل بياناتك على سيرفر مخفي 🧠", type: "them" },
+    { text: "احذف كل شي تكفى", type: "me" },
+    { text: "أرسلت كل شي لأصدقائك 😂", type: "them" },
+    { text: "تم تنفيذ الأمر الأخير: التدمير النهائي", type: "them" }
   ];
 
   let index = 0;
   let soundEnabled = false;
 
-  // تفعيل الصوت بعد أول ضغطة
   document.body.addEventListener("click", () => {
     soundEnabled = true;
   }, { once: true });
 
-  function showMessage() {
-    if (index >= messages.length) return;
-
-    const msg = document.createElement("div");
-    msg.className = "msg from-" + messages[index].type;
-    msg.textContent = messages[index].text;
-    chat.appendChild(msg);
-
-    if (soundEnabled) {
-      keyboardSound.currentTime = 0;
-      keyboardSound.play();
-    }
-
-    chat.scrollTop = chat.scrollHeight;
-
-    index++;
-    setTimeout(showMessage, 1800);
+  function vibrate() {
+    if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
   }
 
-  setTimeout(showMessage, 1500);
+  function showMessage() {
+    if (index >= messages.length) {
+      scary.style.display = "block";
+      alertSound.play();
+      vibrate();
+      return;
+    }
+
+    typing.style.display = "block";
+    setTimeout(() => {
+      typing.style.display = "none";
+      const msg = document.createElement("div");
+      msg.className = "msg from-" + messages[index].type;
+      msg.textContent = messages[index].text;
+      chat.appendChild(msg);
+
+      if (soundEnabled) {
+        keyboardSound.currentTime = 0;
+        keyboardSound.play();
+      }
+
+      vibrate();
+      chat.scrollTop = chat.scrollHeight;
+
+      index++;
+      setTimeout(showMessage, 2000);
+    }, 1000 + Math.random() * 1000);
+  }
+
+  setTimeout(showMessage, 2000);
 </script>
 
 </body>
